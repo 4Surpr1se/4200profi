@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+  table, th, td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+  th {
+    text-align: left;
+    height: 30px;
+  }
+  .th-class {
+    background-color:  #4CAF50;
+    color: aliceblue;
+  }
+</style>
+<script>
+  function changeStatus(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", './' + id.toString() + '/');
+    xhr.send();
+    setTimeout(1000)
+    location.reload();
+  }
+</script>
+<table style="width:100%; border-color: grey">
+  <tr>
+    <th class = "th-class">ID</th>
+    <th class = "th-class">Материал</th>
+    <th class = "th-class">Резка</th>
+    <th class = "th-class">Шлифовка</th>
+    <th class = "th-class">Полировка</th>
+    <th class = "th-class">Комментарии</th>
+    <th class = "th-class">Ответственный</th>
+    <th class = "th-class">Телефон</th>
+    <th class = "th-class">Дата подачи</th>
+    <th class = "th-class">Статус</th>
+    <th class = "th-class">Действие</th>
+  </tr>
+  {% for submission in submissions %}
+  <tr>
+    <th>{{ submission.id }}</th>
+    <th>{{ submission.material }}</th>
+    <th>{{ submission.work_cutting }}</th>
+    <th>{{ submission.work_griding }}</th>
+    <th>{{ submission.work_filling }}</th>
+    <th>{{ submission.comments }}</th>
+    <th>{{ submission.responsible }}</th>
+    <th>{{ submission.phone }}</th>
+    <th>{{ submission.submitted_at }}</th>
+    <th>{{ submission.status }}</th>
+    <th><button onclick="changeStatus({{submission.id}})">Сменить статус</button></th>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+</html>
